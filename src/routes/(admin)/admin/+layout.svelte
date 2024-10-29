@@ -22,7 +22,7 @@
 	}
 </script>
 
-<main class="flex min-h-screen">
+<main class="flex min-h-screen pl-14">
 	<Header {logout} {openCreate} {collections} />
 	<div>
 		{@render children()}
