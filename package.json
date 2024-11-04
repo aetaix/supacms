@@ -1,6 +1,6 @@
 {
-	"name": "supacms",
-	"version": "0.0.1",
+	"name": "thoth-cms",
+	"version": "0.1",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
