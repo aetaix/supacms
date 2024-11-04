@@ -6,7 +6,11 @@ Yup, I know what you're thinking. After endless hours of searching for the perfe
 Thoth CMS is a simple headless CMS that allows you to create, edit, and delete content and collections. That's it. No more, no less.
 It don't require a team of DevOps to deploy it, nor a team of developers to maintain it. 
 
-Build around Svelte 5 and TailwindCSS, Thoth provide a simple and fast interface to manage your content. Plus it's integrated with Vercel, so you can deploy it in a few clicks.
+Build around Svelte 5 and TailwindCSS, Thoth provide a simple and fast interface to manage your content. Plus it's integrated with Vercel and Supabase, so you can deploy it in a few clicks.
+
+> **Note:** Thoth is still in development and not ready for production use.
+
+> Thoth: The Egyptian god of wisdom, writing, scripture, and tales.
 
 ## Developing
 
