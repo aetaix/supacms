@@ -1,8 +1,12 @@
-# Supacms
+# Thoth CMS
 
-Supacms is a headless CMS fully build for Supabase that allows you to create and manage content for your website or application. 
+Arf. Again another headless CMS...
+Yup, I know what you're thinking. After endless hours of searching for the perfect CMS, I've always ended up with the same conclusion: they all are too complex, or overfeatured, or too expensive, or too slow, or too... you name it. So I decided to choose simplicity other than anything else. 
 
-Made with Svelte 5 and Supabase.
+Thoth CMS is a simple headless CMS that allows you to create, edit, and delete content and collections. That's it. No more, no less.
+It don't require a team of DevOps to deploy it, nor a team of developers to maintain it. 
+
+Build around Svelte 5 and TailwindCSS, Thoth provide a simple and fast interface to manage your content. Plus it's integrated with Vercel, so you can deploy it in a few clicks.
 
 ## Developing
 
