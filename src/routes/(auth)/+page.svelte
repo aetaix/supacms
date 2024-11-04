@@ -1,47 +1,142 @@
 <script>
-	import { enhance } from '$app/forms';
-	let loading = $state(false)
+	import { enhance, applyAction } from '$app/forms';
+	import { goto } from '$app/navigation';
+	import { Eye, EyeClosed } from 'lucide-svelte';
+	import Logo from '$lib/components/ui/Logo.svelte';
+	import { Input } from '$lib/components/ui/input/index.ts';
+	import Loader from '$lib/components/ui/Loader.svelte';
+
+	let { form } = $props();
+
+	let showPassword = $state(false);
+	let loading = $state(false);
 </script>
 
-<main class="h-screen flex flex-col items-center justify-center bg-zinc-900 text-white">
-	<div class="bg-zinc-800 border border-zinc-700 rounded-xl shadow w-full max-w-md p-8 space-y-4 mb-4">
-		<h1 class="text-3xl font-medium">Login</h1>
-		<p class="text-zinc-200 text-sm">Hey! Enter your details to get sign in to your account.</p>
+<main class="h-screen flex flex-col">
+	<div class="flex-grow flex flex-col items-center justify-center gap-6">
+		<Logo size={90} />
 		<form
 			method="POST"
 			action="?/login"
 			use:enhance={() => {
-				loading = true
+				loading = true;
+				return async ({ result }) => {
+					if (result.type === 'redirect') {
+						goto(result.location);
+					} else {
+						loading = false;
+						await applyAction(result);
+					}
+				};
 			}}
-			class="flex flex-col space-y-4"
+			class="p-4 bg-white shadow rounded-xl border w-full max-w-xl space-y-4"
 		>
-			<input class="border rounded-lg py-2 px-3 bg-transparent border-zinc-700 text-sm" name="email" type="email" placeholder="Email" />
-			<input
-				class="border rounded-lg py-2 px-3 bg-transparent border-zinc-700 text-sm"
-				name="password"
-				type="password"
-				placeholder="Password"
-			/>
-			<button class="bg-green-400 hover:bg-green-500 transition-colors text-sm text-green-950 py-2 px-3 rounded-lg">
-				{#if loading}
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="animate-spin h-5 w-5 text-white"
-						viewBox="0 0 24 24"
+			<h1 class="text-2xl font-bold">Welcome!</h1>
+			<div>
+				<label for="email" class="block mb-1 text-sm">Email</label>
+				<Input
+					id="email"
+					type="email"
+					name="email"
+					placeholder="Email"
+					class="border rounded-lg py-2 px-3"
+				/>
+			</div>
+			<div>
+				<label for="password" class="block mb-1 text-sm">Password</label>
+				<div class="flex items-center gap-2">
+					<Input
+						id="password"
+						type={showPassword ? 'text' : 'password'}
+						name="password"
+						placeholder="Password"
+						class="border rounded-lg py-2 px-3"
+					/>
+					<button
+						type="button"
+						onclick={() => (showPassword = !showPassword)}
+						class=" size-10 rounded-lg flex items-center justify-center bg-neutral-100 hover:bg-neutral-200"
 					>
-						<circle cx="12" cy="12" r="10" class="opacity-25" />
-						<path
-							class="opacity-75"
-							fill="white"
-							d="M4 12a8 8 0 018-8V2.83a1 1 0 011.7-.71l5 5a1 1 0 010 1.42l-5 5a1 1 0 01-1.41-1.42L11.59 9H12a1 1 0 010 2h-4a1 1 0 01-1-1V4a1 1 0 012 0v4z"
-						/>
-					</svg>
+						{#if showPassword}
+							<EyeClosed size={20} />
+						{:else}
+							<Eye size={20} />
+						{/if}
+					</button>
+				</div>
+			</div>
+
+			<button
+				class="{loading
+					? 'loading text-white'
+					: 'bg-primary hover:bg-primary-hover'} transition-colors w-full rounded-full font-bold py-3 px-4"
+			>
+				{#if loading}
+					<Loader />
 				{:else}
 					Login
 				{/if}
 			</button>
+
+			{#if form?.missing}<p
+					class="rounded-lg border border-red-500 bg-red-500/10 p-2 text-center text-sm text-red-500"
+				>
+					The email field is required
+				</p>{/if}
+			{#if form?.incorrect}<p
+					class="rounded-lg border border-red-500 bg-red-500/10 p-2 text-center text-sm text-red-500"
+				>
+					Vos informations sont incorrectes
+				</p>{/if}
 		</form>
 	</div>
-	<div class="max-w-md text-center">
-		<p class="text-sm text-zinc-500">©{new Date().getFullYear()} - SupaCMS - <a href="/privacy" class="underline">Privacy Policy</a></p>	</div>
+	<footer class="p-4 bg-black text-white text-sm flex justify-between items-center">
+		<p>Privacy Policy</p>
+		<p class="opacity-50">thoth - v0.1.12</p>
+	</footer>
 </main>
+
+<style>
+	.loading {
+		background: linear-gradient(270deg, #e1ff3c, #a83cff, #ff8b3c);
+		background-size: 600% 600%;
+
+		-webkit-animation: loading 1.5s ease infinite;
+		-moz-animation: loading 1.5s ease infinite;
+		animation: loading 1.5s ease infinite;
+	}
+
+	@-webkit-keyframes loading {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+	@-moz-keyframes loading {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+	@keyframes loading {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+</style>

@@ -1,33 +1,31 @@
 <script>
-	import Logo from './Logo.svelte';
+	import Logo from './ui/Logo.svelte';
+	import { Search, Plus } from 'lucide-svelte';
+	import * as Avatar from '$lib/components/ui/avatar/index.ts';
 
-	let { logout, openCreate, collections = $bindable([]) } = $props();
+	let { logout } = $props();
 </script>
 
-<header
-	class="bg-zinc-950 group hover:w-64 transition-all flex flex-col border-r w-14 overflow-hidden fixed top-0 left-0 h-screen z-50"
->
-	<Logo class="w-8 mx-2" />
-
-	<nav class="h-full py-4">
-		{#snippet item(collection)}
-			<div class="group-hover:flex gap-4 items-center px-2 hidden mb-2">
-				<div class="rounded w-10 h-10 bg-zinc-800 shrink-0"></div>
-				<a href={`/admin/contents/${collection.slug}`} class="block">{collection.name}</a>
-				<button>...</button>
-			</div>
-		{/snippet}
-		{#each collections as collection}
-			{@render item(collection)}
-		{/each}
-		<div class="flex gap-4 items-center px-2">
-			<div class="rounded w-10 h-10 bg-zinc-800 shrink-0"></div>
-			<button onclick={openCreate}>Create</button>
+<header class="bg-black text-white flex items-center justify-between p-4">
+	<div class="w-1/3 flex items-center">
+		<Logo size={90} />
+	</div>
+	<div class="w-1/3">
+		<div class="border border-white/20 focus-within:border-white px-4  rounded-full flex gap-2 items-center">
+			<Search size={20} />
+			<input type="text" placeholder="Chercher un contenu" class="bg-transparent border-none w-full py-3 focus:outline-none" />
 		</div>
-	</nav>
-
-	<div class="flex gap-4 items-center px-2">
-		<div class="rounded w-10 h-10 bg-zinc-800 shrink-0"></div>
-		<button onclick={logout}>Logout</button>
+	</div>
+	<div class="w-1/3 flex justify-end items-center gap-2">
+		<button class="py-3 px-4 border border-white/20 hover:bg-primary hover:border-primary transition-colors hover:text-black rounded-full flex items-center gap-2">
+			<Plus size={20} />
+			Créer</button
+		>
+		<Avatar.Root>
+			<Avatar.Image 
+			onclick={logout}
+			src="https://github.com/shadcn.png" alt="@shadcn" />
+			<Avatar.Fallback>CN</Avatar.Fallback>
+		</Avatar.Root>
 	</div>
 </header>

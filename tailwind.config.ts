@@ -14,6 +14,9 @@ const config: Config = {
 				"2xl": "1400px"
 			}
 		},
+		boxShadow: {
+			DEFAULT: "0px 4px 2px 0px rgba(0, 0, 0, 0.10)",
+		},
 		extend: {
 			colors: {
 				border: "hsl(var(--border) / <alpha-value>)",
@@ -23,7 +26,8 @@ const config: Config = {
 				foreground: "hsl(var(--foreground) / <alpha-value>)",
 				primary: {
 					DEFAULT: "hsl(var(--primary) / <alpha-value>)",
-					foreground: "hsl(var(--primary-foreground) / <alpha-value>)"
+					foreground: "hsl(var(--primary-foreground) / <alpha-value>)",
+					hover: "#dff625"
 				},
 				secondary: {
 					DEFAULT: "hsl(var(--secondary) / <alpha-value>)",
@@ -58,7 +62,7 @@ const config: Config = {
 					"accent-foreground": "hsl(var(--sidebar-accent-foreground))",
 					border: "hsl(var(--sidebar-border))",
 					ring: "hsl(var(--sidebar-ring))",
-        		},
+				},
 			},
 			borderRadius: {
 				xl: "calc(var(--radius) + 4px)",
@@ -67,7 +71,7 @@ const config: Config = {
 				sm: "calc(var(--radius) - 4px)"
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans]
+				sans: ['Gotham', ...fontFamily.sans]
 			},
 			keyframes: {
 				"accordion-down": {
@@ -84,10 +88,11 @@ const config: Config = {
 				},
 			},
 			animation: {
-        		"accordion-down": "accordion-down 0.2s ease-out",
-        		"accordion-up": "accordion-up 0.2s ease-out",
-       			"caret-blink": "caret-blink 1.25s ease-out infinite",
-      		},
+				"accordion-down": "accordion-down 0.2s ease-out",
+				"accordion-up": "accordion-up 0.2s ease-out",
+				"caret-blink": "caret-blink 1.25s ease-out infinite",
+			},
+
 		},
 	},
 	plugins: [tailwindcssAnimate],
