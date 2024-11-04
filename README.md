@@ -1,5 +1,7 @@
 # Thoth CMS
 
+> Thoth: The Egyptian god of wisdom, writing, scripture, and tales.
+
 Arf. Again another headless CMS...
 Yup, I know what you're thinking. After endless hours of searching for the perfect CMS, I've always ended up with the same conclusion: they all are too complex, or overfeatured, or too expensive, or too slow, or too... you name it. So I decided to choose simplicity other than anything else. 
 
@@ -10,7 +12,7 @@ Build around Svelte 5 and TailwindCSS, Thoth provide a simple and fast interface
 
 > **Note:** Thoth is still in development and not ready for production use.
 
-> Thoth: The Egyptian god of wisdom, writing, scripture, and tales.
+
 
 ## Developing
 
