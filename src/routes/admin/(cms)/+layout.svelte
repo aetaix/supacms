@@ -3,9 +3,9 @@
 	import { goto } from '$app/navigation';
 	import { collections, contents } from '$lib/stores';
 	import Header from '$lib/components/Header.svelte';
-	import { SquareLibrary } from 'lucide-svelte';
+	import { SquareLibrary, Plus } from 'lucide-svelte';
 	let { data, children } = $props();
-	let { supabase, collections: dataCollections, contents: dataContents } = $derived(data);
+	let { supabase, collections: dataCollections, contents: dataContents } = $state(data);
 
 	$effect(() => {
 		collections.set(dataCollections);
@@ -26,7 +26,12 @@
 	<Header {logout} />
 	<section class="grid grid-cols-6">
 		<aside class="h-[calc(100vh-82px)] border-r col-span-1 p-4 space-y-4">
-			<a href="/admin" class="rounded-md flex justify-start gap-2 w-full bg-black text-white p-2">
+			<a
+				href="/admin"
+				class="rounded-md flex justify-start gap-2 w-full p-2 transition-colors font-bold
+			{$page.route.id === '/admin/(cms)' ? 'bg-black text-white shadow' : 'hover:bg-neutral-100'}
+			"
+			>
 				<SquareLibrary size={24} />
 				Tous les contenus
 			</a>
@@ -36,8 +41,8 @@
 					<li>
 						<a
 							href={'/admin/collections/' + collection.slug}
-							class="p-2 w-full text-start flex justify-between items-center rounded-md
-						{$page.params.slug === collection.slug ? 'bg-neutral-100 ' : ''}
+							class="p-2 w-full text-start flex justify-between items-center rounded-md transition-colors
+						{$page.params.slug === collection.slug ? 'bg-black text-white shadow' : 'hover:bg-neutral-100'}
 						"
 						>
 							<span class="font-bold">{collection.name}</span>
@@ -50,6 +55,10 @@
 					</li>
 				{/each}
 			</ul>
+			<button class="border w-full text-sm flex items-center justify-start gap-2 rounded-md p-2">
+				<Plus size={20} />
+				Ajouter une collection
+			</button>
 		</aside>
 		<div class="col-span-5">
 			{@render children()}

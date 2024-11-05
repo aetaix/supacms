@@ -96,47 +96,4 @@
 	</footer>
 </main>
 
-<style>
-	.loading {
-		background: linear-gradient(270deg, #e1ff3c, #a83cff, #ff8b3c);
-		background-size: 600% 600%;
 
-		-webkit-animation: loading 1.5s ease infinite;
-		-moz-animation: loading 1.5s ease infinite;
-		animation: loading 1.5s ease infinite;
-	}
-
-	@-webkit-keyframes loading {
-		0% {
-			background-position: 0% 50%;
-		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
-	}
-	@-moz-keyframes loading {
-		0% {
-			background-position: 0% 50%;
-		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
-	}
-	@keyframes loading {
-		0% {
-			background-position: 0% 50%;
-		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
-	}
-</style>
