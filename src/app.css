@@ -101,7 +101,7 @@
   }
 }
 
-.loading {
+.loading, .hover\:loading:hover {
   background: linear-gradient(270deg, #e1ff3c, #a83cff, #ff8b3c);
   background-size: 600% 600%;
 

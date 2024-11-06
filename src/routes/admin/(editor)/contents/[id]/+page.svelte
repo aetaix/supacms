@@ -3,9 +3,10 @@
 	import { toast } from 'svelte-sonner';
 	import { Toaster } from '$lib/components/ui/sonner/index.ts';
 
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.ts';
 	import Editor from '$lib/components/Editor.svelte';
 	import Loader from '$lib/components/ui/Loader.svelte';
-	import { ArrowLeft, Save } from 'lucide-svelte';
+	import { ArrowLeft, Save, Ellipsis, Trash, Copy } from 'lucide-svelte';
 	let { data, form } = $props();
 	let { content } = $state(data);
 
@@ -18,7 +19,7 @@
 	<div class="w-1/3 flex items-center gap-4">
 		<a
 			href="/admin"
-			class="size-10 shrink-0 flex items-center hover:bg-black hover:text-white justify-center border rounded-full"
+			class="size-10 shrink-0 flex items-center transition-colors hover:bg-black hover:text-white justify-center border rounded-full"
 		>
 			<ArrowLeft size="24" />
 		</a>
@@ -27,7 +28,7 @@
 		</div>
 	</div>
 	<div class="w-1/3 flex justify-center items-center"></div>
-	<div class="w-1/3 flex justify-end items-center">
+	<div class="w-1/3 flex justify-end items-center gap-2">
 		<form
 			method="POST"
 			action="?/save"
@@ -44,7 +45,7 @@
 						loading = false;
 
 						toast.success('Article saved!', {
-							description: 'Your article has been saved successfully.',
+							description: 'Your article has been saved successfully.'
 						});
 					}
 				};
@@ -59,11 +60,51 @@
 				{#if loading}
 					<Loader />
 				{:else}
-					<Save size="24" />
+					<Save size="20" />
 					Save
 				{/if}
 			</button>
 		</form>
+
+		<DropdownMenu.Root>
+			<DropdownMenu.Trigger
+				class="size-10 shrink-0 flex items-center transition-colors hover:bg-black hover:text-white justify-center border rounded-full"
+			>
+				<Ellipsis size="20" />
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content>
+				<DropdownMenu.Group>
+					<form method="POST" use:enhance={({ formData }) => {
+				
+						// append all content data to the form
+						formData.append('id', content.id);
+		
+						return async ({ result }) => {
+							if (result.type === 'error') {
+								
+							} else {
+								await applyAction(result);
+							}
+						};
+					}}>
+						<button
+							formaction="?/dupliacte"
+							class="w-full p-1 flex items-center gap-2 justify-start text-sm hover:bg-neutral-100 rounded"
+						>
+							<Copy size="16" />
+							Duplicate</button
+						>
+						<button
+							formaction="?/delete"
+							class="w-full p-1 flex items-center gap-2 justify-start text-sm hover:bg-neutral-100 rounded"
+						>
+							<Trash size="16" />
+							Delete</button
+						>
+					</form>
+				</DropdownMenu.Group>
+			</DropdownMenu.Content>
+		</DropdownMenu.Root>
 	</div>
 </header>
 
@@ -78,4 +119,4 @@
 	<Editor bind:value={content.content} />
 </article>
 
-<Toaster  />
+<Toaster />

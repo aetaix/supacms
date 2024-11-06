@@ -83,5 +83,22 @@ export const actions = {
             redirect(303, `/admin/contents/${data[0].id}`);
         }
 
+    },
+    delete: async ({ request, locals: { supabase } }) => {
+        console.log('delete');
+        const formData = await request.formData();
+        const id = formData.get('id') as string;
+
+        const { error } = await supabase
+            .from('contents')
+            .delete()
+            .eq('id', id);
+
+        if (error) {
+            console.error(error);
+            return fail(400, { error: error.message });
+        }
+
+        redirect(303, '/admin');
     }
 } satisfies Actions;

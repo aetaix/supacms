@@ -36,7 +36,7 @@
 				Tous les contenus
 			</a>
 			<ul class="">
-				<h2 class="text-sm mb-2">Tous les collections</h2>
+				<h2 class="text-sm mb-2">Collections</h2>
 				{#each $collections as collection}
 					<li>
 						<a
@@ -55,9 +55,12 @@
 					</li>
 				{/each}
 			</ul>
-			<button class="border w-full text-sm flex items-center justify-start gap-2 rounded-md p-2">
-				<Plus size={20} />
-				Ajouter une collection
+			<button class="block rounded-md hover:loading p-0.5 bg-black w-full">
+				<div class="flex items-center gap-2 w-full text-sm bg-white rounded p-2">
+					<Plus size={20} />
+					Ajouter une collection
+				</div>
+			
 			</button>
 		</aside>
 		<div class="col-span-5">
