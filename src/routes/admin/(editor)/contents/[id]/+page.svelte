@@ -96,7 +96,7 @@
 						>
 						<button
 							formaction="?/delete"
-							class="w-full p-1 flex items-center gap-2 justify-start text-sm hover:bg-neutral-100 rounded"
+							class="w-full p-1 flex items-center gap-2 justify-start text-sm hover:bg-red-100 bg-red-50 text-red-500 rounded"
 						>
 							<Trash size="16" />
 							Delete</button
