@@ -18,9 +18,11 @@
 		class="size-6 bg-black rounded-full flex items-center justify-center text-white text-sm"
 		>{collectionContents.length}</span
 	></h1>
-	<button class="rounded-full py-3 px-4 bg-primary flex items-center font-bold gap-2">
+	<a 
+	href="/admin/contents/new?collection={collection.id}"
+	class="rounded-full py-3 px-4 bg-primary flex items-center font-bold gap-2">
 		<Plus size="20" />
-		Ajouter</button
+		Ajouter</a
 	>
 </header>
 
@@ -33,7 +35,9 @@
 				<Article 
 					id={content.id}
 					title={content.title}
-					content={content.content}
+					excerpt={content.excerpt}
+					created={content.created_at}
+					updated={content.updated_at}
 				/>
 			{/each}
 		</div>

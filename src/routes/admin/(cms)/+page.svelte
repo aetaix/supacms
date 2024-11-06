@@ -11,9 +11,11 @@
 			>{$contents.length}</span
 		>
 	</h1>
-	<button class="rounded-full py-3 px-4 bg-primary flex items-center font-bold gap-2">
+	<a 
+	href="/admin/contents/new"
+	class="rounded-full py-3 px-4 bg-primary flex items-center font-bold gap-2">
 		<Plus size="20" />
-		Ajouter</button
+		Ajouter</a
 	>
 </header>
 
@@ -23,10 +25,13 @@
 	{:else}
 		<div class="grid grid-cols-3 gap-4">
 			{#each $contents as content}
-				<Article 
-				id={content.id}
-				title={content.title} 
-				content={content.content} />
+				<Article
+					id={content.id}
+					title={content.title}
+					excerpt={content.excerpt}
+					created={content.created_at}
+					updated={content.updated_at}
+				/>
 			{/each}
 		</div>
 	{/if}
