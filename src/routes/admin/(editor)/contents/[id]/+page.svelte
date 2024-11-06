@@ -1,5 +1,8 @@
 <script>
 	import { enhance, applyAction } from '$app/forms';
+	import { toast } from 'svelte-sonner';
+	import { Toaster } from '$lib/components/ui/sonner/index.ts';
+
 	import Editor from '$lib/components/Editor.svelte';
 	import Loader from '$lib/components/ui/Loader.svelte';
 	import { ArrowLeft, Save } from 'lucide-svelte';
@@ -11,7 +14,7 @@
 	let loading = $state(false);
 </script>
 
-<header class="flex gap-2 items-center p-4 border-b">
+<header class="flex gap-2 items-center p-4 border-b h-20">
 	<div class="w-1/3 flex items-center gap-4">
 		<a
 			href="/admin"
@@ -39,6 +42,10 @@
 					} else {
 						await applyAction(result);
 						loading = false;
+
+						toast.success('Article saved!', {
+							description: 'Your article has been saved successfully.',
+						});
 					}
 				};
 			}}
@@ -63,10 +70,12 @@
 <article class="w-full max-w-xl mx-auto py-20">
 	<input
 		type="text"
-		class="text-5xl mb-4 font-bold w-full focus:outline-none border py-8 px-0 focus:px-4 transition-all border-b-2 border-transparent border-b-neutral-200 focus:border-black"
+		class="text-5xl mb-4 font-bold w-full focus:outline-none bg-transparent border py-8 px-0 focus:px-4 transition-all border-b-2 border-transparent border-b-neutral-200 focus:border-black"
 		placeholder="Title"
 		bind:value={content.title}
 	/>
 
 	<Editor bind:value={content.content} />
 </article>
+
+<Toaster  />
