@@ -9,6 +9,8 @@
 
 	import StarterKit from '@tiptap/starter-kit';
 	import Underline from '@tiptap/extension-underline';
+	import 'tippy.js/animations/scale.css';
+
 
 	let { value = $bindable() }: { value: string } = $props();
 
@@ -58,11 +60,16 @@
 </script>
 
 {#if editor}
-	<BubbleMenu editor={$editor}>
+	<BubbleMenu 
+	tippyOptions={{
+		animation: 'scale'
+	}}
+	editor={$editor}>
 		<div class="flex border shadow p-1 bg-white gap-1">
+			
 			<button
-				class={cx('rounded-lg text-neutral-400 flex items-center justify-center size-10', {
-					'!text-white bg-neutral-700': isActive('heading', { level: 1 })
+				class={cx('rounded-lg text-neutral-900 flex items-center justify-center size-10', {
+					'!text-white bg-neutral-700': isActive('heading', { level: 2 })
 				})}
 				type="button"
 				onclick={toggleHeading}
@@ -70,7 +77,7 @@
 				<Heading size="16" />
 			</button>
 			<button
-				class={cx('rounded-lg text-neutral-400 flex items-center justify-center size-10', {
+				class={cx('rounded-lg text-neutral-900 flex items-center justify-center size-10', {
 					'!text-white bg-neutral-700': isActive('bold')
 				})}
 				type="button"
@@ -79,7 +86,7 @@
 				<Bold size="16" />
 			</button>
 			<button
-				class={cx('rounded-lg text-neutral-400 flex items-center justify-center size-10', {
+				class={cx('rounded-lg text-neutral-900 flex items-center justify-center size-10', {
 					'!text-white bg-neutral-700': isActive('italic')
 				})}
 				type="button"
@@ -88,7 +95,7 @@
 				<Italic size="16" />
 			</button>
 			<button
-				class={cx('rounded-lg text-neutral-400 flex items-center justify-center size-10', {
+				class={cx('rounded-lg text-neutral-900 flex items-center justify-center size-10', {
 					'!text-white bg-neutral-700': isActive('underline')
 				})}
 				type="button"
@@ -97,7 +104,7 @@
 				<UnderlineIcon size="16" />
 			</button>
 			<button
-				class={cx('rounded-lg text-neutral-400 flex items-center justify-center size-10', {
+				class={cx('rounded-lg text-neutral-900 flex items-center justify-center size-10', {
 					'!text-white bg-neutral-700': isActive('bulletList')
 				})}
 				type="button"

@@ -1,6 +1,5 @@
 <script>
-		import { enhance, applyAction } from '$app/forms';
-
+	import { enhance, applyAction } from '$app/forms';
 	import { page } from '$app/stores';
 	import Article from '$lib/components/ui/Article.svelte';
 	import { collections, contents } from '$lib/stores';
@@ -14,6 +13,10 @@
 		$contents.filter((content) => content.collections.slug === $page.params.slug)
 	);
 </script>
+
+<svelte:head>
+	<title>{collection?.name} • Thoth</title>
+</svelte:head>
 
 <header class="p-4 border-b flex justify-between items-center">
 	<h1 class="text-lg font-bold flex items-center gap-2">
@@ -78,6 +81,7 @@
 					excerpt={content.excerpt}
 					created={content.created_at}
 					updated={content.updated_at}
+					state={content.state}
 				/>
 			{/each}
 		</div>

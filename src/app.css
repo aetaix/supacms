@@ -64,6 +64,10 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
+  ::selection {
+    color: rgb(0, 0, 0);
+    background: hsl(var(--primary) / 1);
+  }
 
   @font-face {
     font-family: 'Gotham';

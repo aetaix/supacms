@@ -39,9 +39,13 @@ export const load: PageServerLoad = async ({ depends, params, url, locals: { sup
 export const actions = {
     save: async ({ request, locals: { supabase } }) => {
         const formData = await request.formData();
+
+        const slug = formData.get('slug') as string;
         const object = formData.get('content') as string;
+
         // JSON.parse is used to convert the FormData object to a plain object
         const content = JSON.parse(object);
+        console.log(content);
         let isNew = false;
 
         // Check the content object
@@ -84,8 +88,43 @@ export const actions = {
         }
 
     },
+    publish: async ({ request, locals: { supabase } }) => {
+        const formData = await request.formData();
+        const object = formData.get('content') as string;
+        const { id } = JSON.parse(object);
+
+        const { data, error } = await supabase
+            .from('contents')
+            .update({ state: 'published' })
+            .eq('id', id)
+            .select();
+
+        if (error) {
+            console.error(error);
+            return fail(400, { error: error.message });
+        }
+
+        return { state: 'published' };
+    },
+    unpublish: async ({ request, locals: { supabase } }) => {
+
+        const formData = await request.formData();
+        const object = formData.get('content') as string;
+        const { id } = JSON.parse(object);
+
+        const { data, error } = await supabase
+            .from('contents')
+            .update({ state: 'draft' })
+            .eq('id', id)
+            .select();
+
+        if (error) {
+            console.error(error);
+            return fail(400, { error: error.message });
+        }
+        return { state: 'draft' };
+    },
     delete: async ({ request, locals: { supabase } }) => {
-        console.log('delete');
         const formData = await request.formData();
         const id = formData.get('id') as string;
 

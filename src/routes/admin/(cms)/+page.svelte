@@ -4,6 +4,10 @@
 	import { Plus } from 'lucide-svelte';
 </script>
 
+<svelte:head>
+	<title>Contents • Thoth</title>
+</svelte:head>
+
 <header class="p-4 border-b flex justify-between items-center">
 	<h1 class="text-lg font-bold flex items-center gap-2">
 		Tous les contenus <span
@@ -31,6 +35,7 @@
 					excerpt={content.excerpt}
 					created={content.created_at}
 					updated={content.updated_at}
+					state={content.state}
 				/>
 			{/each}
 		</div>
